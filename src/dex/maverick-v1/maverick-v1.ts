@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Interface } from '@ethersproject/abi';
 import _ from 'lodash';
 import {
@@ -85,32 +86,34 @@ export class MaverickV1
           this.network,
           this.dexHelper,
           {
-            address: pool.tokenA.id,
+            // address: pool.tokenA.id,
+            address: pool.tokenA.address,
             symbol: pool.tokenA.symbol,
             decimals: pool.tokenA.decimals,
           },
           {
-            address: pool.tokenB.id,
+            // address: pool.tokenB.id,
+            address: pool.tokenB.address,
             symbol: pool.tokenB.symbol,
             decimals: pool.tokenB.decimals,
           },
           pool.fee,
           pool.tickSpacing,
-          pool.protocolFeeRatio,
+          pool.protocolFeeRatio || 0,
           pool.lookback,
           pool.id,
           MaverickV1Config[this.dexKey][this.network].poolInspectorAddress,
           this.logger,
         );
-        const onChainState = await eventPool.generateState(blockNumber);
-        if (blockNumber) {
-          eventPool.setState(onChainState, blockNumber);
-          this.dexHelper.blockManager.subscribeToLogs(
-            eventPool,
-            eventPool.addressesSubscribed,
-            blockNumber,
-          );
-        }
+        // const onChainState = await eventPool.generateState(blockNumber);
+        // if (blockNumber) {
+        //   eventPool.setState(onChainState, blockNumber);
+        //   this.dexHelper.blockManager.subscribeToLogs(
+        //     eventPool,
+        //     eventPool.addressesSubscribed,
+        //     blockNumber,
+        //   );
+        // }
         this.pools[eventPool.address] = eventPool;
       }),
     );
@@ -134,12 +137,19 @@ export class MaverickV1
     this.logger.info(
       `Fetching ${this.dexKey}_${this.network} Pools from subgraph`,
     );
-    const { data } = await this.dexHelper.httpRequest.post(
-      this.subgraphURL,
-      { query: fetchAllPools, count: MAX_POOL_CNT },
-      SUBGRAPH_TIMEOUT,
-    );
-    return data.pools;
+    // const { data } = await this.dexHelper.httpRequest.post(
+    //   this.subgraphURL,
+    //   { query: fetchAllPools, count: MAX_POOL_CNT },
+    //   SUBGRAPH_TIMEOUT,
+    // );
+    // console.log('-----fetchAllSubgraphPools.data-----');
+    // console.log(this.subgraphURL);
+    // console.log(data.pools);
+    // return data.pools;
+    const data = require('./maverick_pools_1.json');
+    console.log('-----fetchAllSubgraphPools.data-----');
+    console.log(`data.pools.length: ${data.length}`);
+    return data;
   }
 
   // Returns list of pool identifiers that can be used
@@ -206,6 +216,8 @@ export class MaverickV1
       }
 
       const allPools = await this.getPools(from, to);
+      // console.log('allPools: ', allPools);
+      console.log(`allPools.length: ${allPools.length}`);
 
       const allowedPools = limitPools
         ? allPools.filter(pool =>
@@ -223,10 +235,10 @@ export class MaverickV1
           allowedPools.map(async (pool: MaverickV1EventPool) => {
             try {
               let state = pool.getState(blockNumber);
-              if (state === null) {
-                state = await pool.generateState(blockNumber);
-                pool.setState(state, blockNumber);
-              }
+              // if (state === null) {
+              //   state = await pool.generateState(blockNumber);
+              //   pool.setState(state, blockNumber);
+              // }
               if (state === null) {
                 this.logger.debug(
                   `Received null state for pool ${pool.address}`,

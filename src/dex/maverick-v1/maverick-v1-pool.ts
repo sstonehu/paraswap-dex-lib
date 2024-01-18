@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AbiCoder, Interface } from '@ethersproject/abi';
 import { assert, DeepReadonly } from 'ts-essentials';
 import { Log, Logger, Address } from '../../types';
@@ -129,6 +130,7 @@ export class MaverickV1EventPool extends StatefulEventSubscriber<PoolState> {
    * @returns state of the event subscriber at blocknumber
    */
   async generateState(blockNumber: number): Promise<Readonly<PoolState>> {
+    const startTime = Date.now();
     const rawBins = await this.poolInspectorContract.methods['getActiveBins'](
       this.address,
       0,
@@ -163,6 +165,7 @@ export class MaverickV1EventPool extends StatefulEventSubscriber<PoolState> {
       }
     });
 
+    console.log('generateState time cost', Date.now() - startTime, 'ms');
     return {
       activeTick: BigInt(rawState.activeTick),
       binCounter: BigInt(rawState.binCounter),

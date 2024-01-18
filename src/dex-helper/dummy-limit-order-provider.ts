@@ -1,8 +1,10 @@
 import { ILimitOrderProvider } from './ilimit-order-provider';
-import {
-  ParaSwapOrderResponse,
-  ParaSwapOrderBookResponse,
-} from '../dex/paraswap-limit-orders/types';
+// import {
+//   ParaSwapOrderResponse,
+//   ParaSwapOrderBookResponse,
+// } from '../dex/paraswap-limit-orders/types';
+type ParaSwapOrderResponse = any;
+type ParaSwapOrderBookResponse = any;
 import { SwapSide, Network, LIMIT_ORDER_PROVIDERS } from '../constants';
 import { Address, BigIntAsString } from '../types';
 

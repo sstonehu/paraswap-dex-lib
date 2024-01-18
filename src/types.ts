@@ -14,7 +14,7 @@ import { Logger } from 'log4js';
 export { Logger } from 'log4js';
 import { OptimalRate } from '@paraswap/core';
 import BigNumber from 'bignumber.js';
-import { RFQConfig } from './dex/generic-rfq/types';
+// import { RFQConfig } from './dex/generic-rfq/types';
 
 // Check: Should the logger be replaced with Logger Interface
 export type LoggerConstructor = (name?: string) => Logger;
@@ -269,7 +269,7 @@ export type Config = {
   privateHttpProvider: string;
   adapterAddresses: { [name: string]: Address };
   uniswapV2ExchangeRouterAddress: Address;
-  rfqConfigs: Record<string, RFQConfig>;
+  rfqConfigs: any;
   rpcPollingMaxAllowedStateDelayInBlocks: number;
   rpcPollingBlocksBackToTriggerUpdate: number;
   hashFlowAuthToken?: string;

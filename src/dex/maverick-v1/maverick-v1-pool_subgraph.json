@@ -1,0 +1,648 @@
+[
+  {
+    "id": "0x050853d20d1b4f5529cd8dec986b752e7c9d95f7",
+    "tickSpacing": "1",
+    "fee": "0.00005",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x853d955acef822db058eb8505911ed77f175b99e",
+      "decimals": 18,
+      "symbol": "FRAX"
+    },
+    "tokenB": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    }
+  },
+  {
+    "id": "0x1db8784119dcfe4213a0ceb2c55b07e81c72b475",
+    "tickSpacing": "953",
+    "fee": "0.01",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5faa989af96af85384b8a938c2ede4a7378d9875",
+      "decimals": 18,
+      "symbol": "GAL"
+    },
+    "tokenB": {
+      "id": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "decimals": 18,
+      "symbol": "wstETH"
+    }
+  },
+  {
+    "id": "0x20ee9efe1b85b3077c53d648b17936d4ddb4e407",
+    "tickSpacing": "1",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xae78736cd615f374d3085123a210448e74fc6393",
+      "decimals": 18,
+      "symbol": "rETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x23f6b8a4093d740a5f39d20a1f543e4b26b7791a",
+    "tickSpacing": "9",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+      "decimals": 18,
+      "symbol": "LUSD"
+    },
+    "tokenB": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    }
+  },
+  {
+    "id": "0x25f159fd4b15a2a7a9703ca83d0e63df9eeb0a65",
+    "tickSpacing": "198",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x2ebe19aa2e29c8acadb14be3e7de153b0141e2aa",
+    "tickSpacing": "9",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "decimals": 18,
+      "symbol": "wstETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x43a81f1e714f12147e5e865c152c6aac14c80bff",
+    "tickSpacing": "99",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0x43c014e1e6afeb8a76fde2420a0b65e1ca06c9bf",
+    "tickSpacing": "3",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "decimals": 18,
+      "symbol": "wstETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x46557085e28bcc6d8f653a9ee84c6c9b67642b93",
+    "tickSpacing": "1",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0x4789fad0cf791fec659256900074b80c89c47edd",
+    "tickSpacing": "1",
+    "fee": "0.00008",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "decimals": 18,
+      "symbol": "DAI"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0x48e236fa378ffeaf86443b6a304ce5670c3cd9ab",
+    "tickSpacing": "198",
+    "fee": "0.005",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5a98fcbea516cf06857215779fd812ca3bef1b32",
+      "decimals": 18,
+      "symbol": "LDO"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0x496d3fe47211521eca1fff521d1f8022b0287c9f",
+    "tickSpacing": "198",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x4a94f0a97615f0bccbc09968b1c49c9ae1eb38a8",
+    "tickSpacing": "1",
+    "fee": "0.00005",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0x52de4ebf8bfb4048f412bcb415a52cb98651f9ed",
+    "tickSpacing": "99",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "decimals": 8,
+      "symbol": "WBTC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x5cb98367c32d8a1d910461c572c558d57ca68d25",
+    "tickSpacing": "9",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xbe9895146f7af43049ca1c1ae358b0541ea49704",
+      "decimals": 18,
+      "symbol": "cbETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x5eef9ab433f598d408ec30adf58d182a07a1189d",
+    "tickSpacing": "953",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x6b04ce6e4d728a97bafd1c78f8ea46b73ada552d",
+    "tickSpacing": "487",
+    "fee": "0.0025",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+      "decimals": 18,
+      "symbol": "UNI"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0x73ee7d74a1fe9d768112ba40549bc9c2003f9b63",
+    "tickSpacing": "3",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+      "decimals": 18,
+      "symbol": "LUSD"
+    },
+    "tokenB": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    }
+  },
+  {
+    "id": "0x7a2b6d8325c3912939229272256769b06cedb1b2",
+    "tickSpacing": "487",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x7fafd253ea3f8351e02135b8f0d4ed31a6e7a59d",
+    "tickSpacing": "487",
+    "fee": "0.001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+      "decimals": 18,
+      "symbol": "LUSD"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x857d1b4f80ecb6ad7e4e7d120ffc1292ee8ddafc",
+    "tickSpacing": "9",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "decimals": 18,
+      "symbol": "wstETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x85dd09159b42417c1e0782fa2c6ba3b790be9ead",
+    "tickSpacing": "487",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0x87da68bfbaf58ba6a29fed851f0411e7c989b68b",
+    "tickSpacing": "487",
+    "fee": "0.01",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x2dff88a56767223a5529ea5960da7a3f5f766406",
+      "decimals": 18,
+      "symbol": "ID"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xa2cc3e531f49e6e1b0e360f371e6171f5aeaec91",
+    "tickSpacing": "953",
+    "fee": "0.0075",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "decimals": 18,
+      "symbol": "PEPE"
+    },
+    "tokenB": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    }
+  },
+  {
+    "id": "0xa7b1d843ae0c0e5e561149d7624f9e469fcacf4d",
+    "tickSpacing": "487",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+      "decimals": 18,
+      "symbol": "LUSD"
+    },
+    "tokenB": {
+      "id": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "decimals": 18,
+      "symbol": "wstETH"
+    }
+  },
+  {
+    "id": "0xab1e2d29699146a2e07c3a1c8ad8cb914a536f7a",
+    "tickSpacing": "487",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xb04f13750cd764eeceb07e19254564787c9c72bf",
+    "tickSpacing": "1",
+    "fee": "0.00005",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "decimals": 18,
+      "symbol": "DAI"
+    },
+    "tokenB": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    }
+  },
+  {
+    "id": "0xbe633b67d7d4197b798179066b503ecd9c04d05b",
+    "tickSpacing": "10",
+    "fee": "0.0002",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    },
+    "tokenB": {
+      "id": "0xf951e335afb289353dc249e82926178eac7ded78",
+      "decimals": 18,
+      "symbol": "swETH"
+    }
+  },
+  {
+    "id": "0xc27f074873af25378270cc50b9854cf7a013eab6",
+    "tickSpacing": "953",
+    "fee": "0.01",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "decimals": 18,
+      "symbol": "PEPE"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xcb2e6adc815195069977692de2f6e22e920a6b1b",
+    "tickSpacing": "9",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+      "decimals": 18,
+      "symbol": "wstETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xcf4595ae4e43bc8c7be90849babc1da27e47813c",
+    "tickSpacing": "9",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5e8422345238f34275888049021821e8e08caa1f",
+      "decimals": 18,
+      "symbol": "frxETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xd1e50b60287faada2a7d5ea5632df78f7f2f0cb8",
+    "tickSpacing": "1",
+    "fee": "0.00005",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0xddcd60dcc952023ec4bcd27788384f06e901e61e",
+    "tickSpacing": "487",
+    "fee": "0.0075",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "decimals": 18,
+      "symbol": "PEPE"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xe870c025ede621834f538468034398cff26ac926",
+    "tickSpacing": "3",
+    "fee": "0.0004",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xbe9895146f7af43049ca1c1ae358b0541ea49704",
+      "decimals": 18,
+      "symbol": "cbETH"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xe94f1ec6aaaba70e109535f88d0c836ce044fd16",
+    "tickSpacing": "953",
+    "fee": "0.0025",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x2dff88a56767223a5529ea5960da7a3f5f766406",
+      "decimals": 18,
+      "symbol": "ID"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xf7c8ab6912894393e6ee9c0222c672a4441dfea2",
+    "tickSpacing": "953",
+    "fee": "0.0025",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+      "decimals": 18,
+      "symbol": "LUSD"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  },
+  {
+    "id": "0xfc0c52a2b66a19b39efbe4332bc42186ada1ee45",
+    "tickSpacing": "1",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "tokenB": {
+      "id": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "decimals": 6,
+      "symbol": "USDT"
+    }
+  },
+  {
+    "id": "0xff3074fd3bccc15b54d2c7fbfe48108a6116a321",
+    "tickSpacing": "487",
+    "fee": "0.0001",
+    "lookback": "10800000000000000000000",
+    "protocolFeeRatio": "0",
+    "tokenA": {
+      "id": "0x5f98805a4e8be255a32880fdec7f6728c6568ba0",
+      "decimals": 18,
+      "symbol": "LUSD"
+    },
+    "tokenB": {
+      "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "decimals": 18,
+      "symbol": "WETH"
+    }
+  }
+]
