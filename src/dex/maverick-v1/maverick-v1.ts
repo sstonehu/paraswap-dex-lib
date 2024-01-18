@@ -135,7 +135,7 @@ export class MaverickV1
 
   async fetchAllSubgraphPools(): Promise<SubgraphPoolBase[]> {
     this.logger.info(
-      `Fetching ${this.dexKey}_${this.network} Pools from subgraph`,
+      `Fetching ${this.dexKey}_${this.network} Pools from maverick_pools.json`,
     );
     // const { data } = await this.dexHelper.httpRequest.post(
     //   this.subgraphURL,
@@ -217,7 +217,7 @@ export class MaverickV1
 
       const allPools = await this.getPools(from, to);
       // console.log('allPools: ', allPools);
-      console.log(`allPools.length: ${allPools.length}`);
+      // console.log(`allPools.length: ${allPools.length}`);
 
       const allowedPools = limitPools
         ? allPools.filter(pool =>

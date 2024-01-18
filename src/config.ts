@@ -320,7 +320,7 @@ export function generateConfig(network: number): Config {
   const nativeTokenName =
     baseConfig.nativeTokenName || baseConfig.nativeTokenSymbol;
   if (!baseConfig.privateHttpProvider) {
-    throw new Error(`Missing HTTP Provider for network ${network}`);
+    // throw new Error(`Missing HTTP Provider for network ${network}`);
   }
   return {
     network: baseConfig.network,
@@ -339,7 +339,7 @@ export function generateConfig(network: number): Config {
     augustusRFQAddress: baseConfig.augustusRFQAddress,
     tokenTransferProxyAddress: baseConfig.tokenTransferProxyAddress,
     multicallV2Address: baseConfig.multicallV2Address,
-    privateHttpProvider: baseConfig.privateHttpProvider,
+    privateHttpProvider: baseConfig.privateHttpProvider || '',
     adapterAddresses: { ...baseConfig.adapterAddresses },
     uniswapV2ExchangeRouterAddress: baseConfig.uniswapV2ExchangeRouterAddress,
     uniswapV3EventLoggingSampleRate: baseConfig.uniswapV3EventLoggingSampleRate,

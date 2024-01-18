@@ -175,6 +175,53 @@ export class MaverickV1EventPool extends StatefulEventSubscriber<PoolState> {
     };
   }
 
+  /**
+   * The function calculates state using result of on-chain calls.
+   * This funciton is called after multicall which have fetched pools on-chain states
+   * then calc the state of event pool, to used for next step `pool.setState`
+   * @param blockNumber - Blocknumber for which the state should
+   * should be generated
+   * @returns state of the event subscriber at blocknumber
+   */
+  calcAndSetState(blockNumber: number, rawBins: any, rawState: any) {
+    let binPositions: { [tick: string]: { [kind: string]: bigint } } = {};
+    let bins: { [id: string]: Bin } = {};
+    let binMap: { [id: string]: bigint } = {};
+
+    rawBins.forEach((bin: any) => {
+      bins[bin.id] = {
+        reserveA: BigInt(bin.reserveA),
+        reserveB: BigInt(bin.reserveB),
+        kind: BigInt(bin.kind),
+        lowerTick: BigInt(bin.lowerTick),
+        mergeId: BigInt(bin.mergeId),
+      };
+      if (bin.mergeId == 0) {
+        MaverickBinMap.putTypeAtTick(
+          binMap,
+          BigInt(bin.kind),
+          BigInt(bin.lowerTick),
+        );
+        if (!binPositions[bin.lowerTick]) {
+          binPositions[bin.lowerTick] = {};
+        }
+        binPositions[bin.lowerTick][bin.kind] = BigInt(bin.id);
+      }
+    });
+
+    const state = {
+      activeTick: BigInt(rawState.activeTick),
+      binCounter: BigInt(rawState.binCounter),
+      bins: bins,
+      binPositions: binPositions,
+      binMap: binMap,
+    };
+
+    // console.log('calcAndSetState', blockNumber, state)
+
+    this.setState(state, blockNumber);
+  }
+
   handleAddLiquidityEvent(event: any, state: PoolState, log: Log) {
     event.args.binDeltas.forEach((bin: any) => {
       if (!state.bins[bin.binId.toString()]) {

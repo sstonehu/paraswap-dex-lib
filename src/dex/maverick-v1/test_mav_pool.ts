@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 // const ethers = require('ethers');
 import { ethers } from 'ethers';
-import { DummyDexHelper } from '../../dex-helper/index';
-import { Network, SwapSide } from '../../constants';
 import { MaverickV1 } from './maverick-v1';
 import { MaverickV1EventPool } from './maverick-v1-pool';
 
-import { Bin, MaverickV1Data, PoolState } from './types';
+import { DummyDexHelper } from '../../dex-helper/index';
+import { Network, SwapSide } from '../../constants';
+import { Bin } from './types';
 import { MaverickBinMap } from './maverick-math/maverick-bin-map';
 
 import PoolABI from '../../abi/maverick-v1/pool.json';
@@ -14,15 +14,17 @@ import PoolInspectorABI from '../../abi/maverick-v1/pool-inspector.json';
 
 // import { BI_POWS } from '../../bigint-constants';
 // import { Tokens } from '../../../tests/constants-e2e';
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 
+const HTTP_PROVIDER_1 =
+  'https://eth-mainnet.g.alchemy.com/v2/823DxqwvlqQ3yHCXvNXn61rlJaCKnRgp';
 async function fetchPoolDataBath(
   maverickV1: MaverickV1,
   pools: MaverickV1EventPool[],
   blockNumber: number,
 ) {
-  const provider = new ethers.JsonRpcProvider(process.env.HTTP_PROVIDER_1, {
+  const provider = new ethers.JsonRpcProvider(HTTP_PROVIDER_1, {
     name: 'mainnet',
     chainId: 1,
   });
@@ -81,7 +83,7 @@ async function fetchPoolDataBath(
 }
 
 async function main() {
-  const provider = new ethers.JsonRpcProvider(process.env.HTTP_PROVIDER_1, {
+  const provider = new ethers.JsonRpcProvider(HTTP_PROVIDER_1, {
     name: 'mainnet',
     chainId: 1,
   });
@@ -111,7 +113,7 @@ async function main() {
 
   const amounts = [0n, BigInt(1e9), BigInt(2e9)];
 
-  const dexHelper = new DummyDexHelper(network, process.env.HTTP_PROVIDER_1);
+  const dexHelper = new DummyDexHelper(network, HTTP_PROVIDER_1);
   const dexKey = 'MaverickV1';
 
   // 0. prepare all mavV1 pools
