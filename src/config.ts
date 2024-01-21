@@ -3,6 +3,8 @@ import { Config, Address, Token } from './types';
 import { Network, PORT_TEST_SERVER, ETHER_ADDRESS } from './constants';
 import { isETHAddress } from './utils';
 import { RFQConfig } from './dex/generic-rfq/types';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Hardcoded and environment values from which actual config is derived
 type BaseConfig = {
