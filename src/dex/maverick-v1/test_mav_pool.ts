@@ -120,7 +120,8 @@ async function main() {
   // create MaverickV1 instance, and initialize all pools
   const maverickV1 = new MaverickV1(network, dexKey, dexHelper);
   console.time('initializePricing');
-  await maverickV1.initializePricing(blockNumber);
+  const poolsData = require('./maverick_pools_1.json');
+  await maverickV1.initializePricing(blockNumber, poolsData);
   console.timeEnd('initializePricing');
 
   // 1. find pools for tokenList

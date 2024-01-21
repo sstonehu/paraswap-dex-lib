@@ -77,8 +77,9 @@ export class MaverickV1
       MaverickV1Config[this.dexKey][this.network].routerAddress;
   }
 
-  async setupEventPools(blockNumber: number) {
-    const pools = await this.fetchAllSubgraphPools();
+  async setupEventPools(blockNumber: number, poolsData: SubgraphPoolBase[]) {
+    // const pools = await this.fetchAllSubgraphPools();
+    const pools = poolsData;
     await Promise.all(
       pools.map(async (pool: any) => {
         const eventPool = new MaverickV1EventPool(
@@ -123,8 +124,8 @@ export class MaverickV1
   // pricing service. It is intended to setup the integration
   // for pricing requests. It is optional for a DEX to
   // implement this function
-  async initializePricing(blockNumber: number) {
-    await this.setupEventPools(blockNumber);
+  async initializePricing(blockNumber: number, poolsData: SubgraphPoolBase[]) {
+    await this.setupEventPools(blockNumber, poolsData);
   }
 
   // Returns the list of contract adapters (name and index)

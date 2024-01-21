@@ -1,6 +1,6 @@
 {
   "name": "@sstonehu/paraswap-dex-lib",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "repository": "https://github.com/paraswap/paraswap-dex-lib",
