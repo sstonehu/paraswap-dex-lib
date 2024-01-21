@@ -117,6 +117,20 @@ export const Adapters: {
       },
     ],
   },
+  [Network.BASE]: {
+    [SwapSide.SELL]: [
+      {
+        name: 'BaseAdapter01',
+        index: 6,
+      },
+    ],
+    [SwapSide.BUY]: [
+      {
+        name: 'BaseBuyAdapter',
+        index: 4,
+      },
+    ],
+  },
 };
 
 export const UniswapV2Config: DexConfigMap<DexParams> = {
@@ -386,6 +400,15 @@ export const UniswapV2Config: DexConfigMap<DexParams> = {
       poolGasCost: 90 * 1000,
       feeCode: 25,
     },
+    [Network.ARBITRUM]: {
+      subgraphURL:
+        'https://api.studio.thegraph.com/query/45376/exchange-v2-arbitrum/version/latest',
+      factoryAddress: '0x02a84c1b3BBD7401a5f7fa98a384EBC70bB5749E',
+      initCode:
+        '0x57224589c67f3f30a6b0d7a1b54cf3153ab84563bc609ef41dfb34f8b2974d2d',
+      poolGasCost: 90 * 1000,
+      feeCode: 25,
+    },
   },
   PaintSwap: {
     [Network.FANTOM]: {
@@ -518,7 +541,8 @@ export const UniswapV2Config: DexConfigMap<DexParams> = {
   },
   QuickSwap: {
     [Network.POLYGON]: {
-      subgraphURL: 'https://api.fura.org/subgraphs/name/quickswap',
+      subgraphURL:
+        'https://api.thegraph.com/subgraphs/name/sameepsi/quickswap06',
       factoryAddress: '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32',
       initCode:
         '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f',
@@ -684,6 +708,15 @@ export const UniswapV2Config: DexConfigMap<DexParams> = {
         '0x1a76b7e7272f6187014e23f04d1b2e543eed2fd1f76481149008cc6eacb05c22',
       poolGasCost: 80 * 1000,
       feeCode: 30,
+    },
+  },
+  BaseSwap: {
+    [Network.BASE]: {
+      factoryAddress: '0xFDa619b6d20975be80A10332cD39b9a4b0FAa8BB',
+      initCode:
+        '0xb618a2730fae167f5f8ac7bd659dd8436d571872655bcb6fd11f2158c8a64a3b',
+      poolGasCost: 90 * 1000,
+      feeCode: 25,
     },
   },
 };
