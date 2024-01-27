@@ -41,6 +41,7 @@ class DummyCache implements ICache {
   }
 
   async rawget(key: string): Promise<string | null> {
+    return this.storage[key] ? this.storage[key] : null;
     return null;
   }
 
@@ -49,10 +50,12 @@ class DummyCache implements ICache {
     value: string,
     ttl: number,
   ): Promise<string | null> {
-    return null;
+    this.storage[key] = value;
+    return 'OK';
   }
 
   async rawdel(key: string): Promise<void> {
+    delete this.storage[key];
     return;
   }
 
@@ -109,6 +112,10 @@ class DummyCache implements ICache {
   }
 
   async zremrangebyscore(key: string, min: number, max: number) {
+    return 0;
+  }
+
+  async zrem(key: string, membersKeys: string[]): Promise<number> {
     return 0;
   }
 
@@ -245,14 +252,16 @@ export class DummyDexHelper implements IDexHelper {
   getTokenUSDPrice: (token: Token, amount: bigint) => Promise<number>;
 
   constructor(network: number, rpcUrl?: string) {
-    if (rpcUrl === undefined) {
-      throw new Error('provider url is undefined');
-    }
     this.config = new ConfigHelper(false, generateConfig(network), 'is');
     this.cache = new DummyCache();
     this.httpRequest = new DummyRequestWrapper();
-    this.provider = new StaticJsonRpcProvider(rpcUrl, network);
-    this.web3Provider = new Web3(rpcUrl);
+    this.provider = new StaticJsonRpcProvider(
+      rpcUrl ? rpcUrl : this.config.data.privateHttpProvider,
+      network,
+    );
+    this.web3Provider = new Web3(
+      rpcUrl ? rpcUrl : this.config.data.privateHttpProvider,
+    );
     this.multiContract = new this.web3Provider.eth.Contract(
       multiABIV2 as any,
       this.config.data.multicallV2Address,
@@ -260,7 +269,7 @@ export class DummyDexHelper implements IDexHelper {
     this.blockManager = new DummyBlockManager();
     this.getLogger = name => {
       const logger = log4js.getLogger(name);
-      logger.level = 'warn';
+      logger.level = 'debug';
       return logger;
     };
     // For testing use only full parts like 1, 2, 3 ETH, not 0.1 ETH etc

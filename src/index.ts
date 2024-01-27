@@ -15,16 +15,16 @@ export { MaverickBinMap } from './dex/maverick-v1/maverick-math/maverick-bin-map
 
 // // export { DexAdapterService } from './dex';
 
-// export {
-//   IDexHelper,
-//   ICache,
-//   IBlockManager,
-//   IRequestWrapper,
-//   RequestConfig,
-//   RequestHeaders,
-//   Response,
-//   EventSubscriber,
-// } from './dex-helper';
+export {
+  IDexHelper,
+  ICache,
+  IBlockManager,
+  IRequestWrapper,
+  RequestConfig,
+  RequestHeaders,
+  Response,
+  EventSubscriber,
+} from './dex-helper';
 
 // export { StatefulEventSubscriber } from './stateful-event-subscriber';
 

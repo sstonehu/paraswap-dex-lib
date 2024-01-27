@@ -283,11 +283,20 @@ export type ExchangeTxInfo = {
   deadline?: bigint;
 };
 
+// export type PreprocessTransactionOptions = {
+//   slippageFactor: BigNumber;
+//   txOrigin: Address;
+//   hmac?: string;
+//   mockRfqAndLO?: boolean;
+// };
+
 export type PreprocessTransactionOptions = {
   slippageFactor: BigNumber;
   txOrigin: Address;
   hmac?: string;
   mockRfqAndLO?: boolean;
+  isDirectMethod?: boolean;
+  partner?: string;
 };
 
 export type TransferFeeParams = {
