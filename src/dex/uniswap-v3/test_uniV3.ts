@@ -46,7 +46,7 @@ async function main() {
   };
   const destToken = TokenB;
 
-  const amounts = [0n, BigInt(1e18), BigInt(2e18)];
+  const amounts = [BigInt(2e18), BigInt(4e18), BigInt(10e18)];
 
   const dexHelper = new DummyDexHelper(network, HTTP_PROVIDER_1);
   const dexKey = 'UniswapV3';
@@ -162,6 +162,40 @@ async function main() {
     `bwd ${destToken.symbol} > ${srcToken.symbol} Pool Prices: `,
     bwdPoolPrices,
   );
+
+  const pool =
+    uniswapV3.eventPools[
+      'UniswapV3_0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2_0xdAC17F958D2ee523a2206206994597C13D831ec7_100'
+    ];
+
+  if (pool) {
+    const fwdPoolPrices1 = uniswapV3.getPricesVolumeByPool(
+      pool,
+      TokenA,
+      TokenB,
+      amounts,
+      SwapSide.SELL,
+      blockNumber,
+    );
+
+    const bwdPoolPrices1 = await uniswapV3.getPricesVolumeByPool(
+      pool,
+      TokenB,
+      TokenA,
+      amounts,
+      SwapSide.BUY,
+      blockNumber,
+    );
+    console.timeEnd('getPricesVolume1');
+    console.log(
+      `fwd1 ${srcToken.symbol} > ${destToken.symbol} Pool Prices: `,
+      fwdPoolPrices1,
+    );
+    console.log(
+      `bwd1 ${destToken.symbol} > ${srcToken.symbol} Pool Prices: `,
+      bwdPoolPrices1,
+    );
+  }
 }
 
 main()

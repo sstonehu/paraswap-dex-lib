@@ -111,7 +111,7 @@ async function main() {
   };
   const destToken = TokenB;
 
-  const amounts = [0n, BigInt(1e9), BigInt(2e9)];
+  const amounts = [BigInt(1e9), BigInt(2e9), BigInt(8e9)];
 
   const dexHelper = new DummyDexHelper(network, HTTP_PROVIDER_1);
   const dexKey = 'MaverickV1';

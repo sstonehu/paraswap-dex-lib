@@ -642,9 +642,12 @@ export class UniswapV3
           // Trim from 0 fee postfix, so it become comparable
         ).slice(0, -1);
 
+        console.log('limitPools', limitPools);
         const poolIdentifiers = limitPools.filter(identifier =>
           identifier.startsWith(pairIdentifierWithoutFee),
         );
+
+        console.log('poolIdentifiers.length:', poolIdentifiers.length);
 
         // selectedPools = (
         //   await Promise.all(
@@ -710,7 +713,8 @@ export class UniswapV3
         side == SwapSide.SELL ? _srcToken.decimals : _destToken.decimals,
       );
 
-      const _amounts = [...amounts.slice(1)];
+      // const _amounts = [...amounts.slice(1)];
+      const _amounts = amounts;
 
       const [token0] = this._sortTokens(_srcAddress, _destAddress);
 
@@ -753,9 +757,8 @@ export class UniswapV3
           return null;
         }
 
-        const prices = [0n, ...pricesResult.outputs];
+        const prices = [...pricesResult.outputs];
         const gasCost = [
-          0,
           ...pricesResult.outputs.map((p, index) => {
             if (p == 0n) {
               return 0;
@@ -816,6 +819,110 @@ export class UniswapV3
       );
       return null;
     }
+  }
+
+  getPricesVolumeByPool(
+    pool: UniswapV3EventPool,
+    srcToken: Token,
+    destToken: Token,
+    amounts: bigint[],
+    side: SwapSide,
+    blockNumber: number,
+  ) {
+    const _srcToken = this.dexHelper.config.wrapETH(srcToken);
+    const _destToken = this.dexHelper.config.wrapETH(destToken);
+
+    const [_srcAddress, _destAddress] = this._getLoweredAddresses(
+      _srcToken,
+      _destToken,
+    );
+
+    if (_srcAddress === _destAddress) return null;
+    const state = pool.getState(blockNumber);
+    if (!state) {
+      return null;
+    }
+
+    if (state.liquidity <= 0n) {
+      if (state.liquidity < 0) {
+        this.logger.error(
+          `${this.dexKey}-${this.network}: ${pool.poolAddress} pool has negative liquidity: ${state.liquidity}. Find with key: ${pool.mapKey}`,
+        );
+      }
+      this.logger.trace(`pool have 0 liquidity`);
+      return null;
+    }
+
+    const unitAmount = getBigIntPow(
+      side == SwapSide.SELL ? _srcToken.decimals : _destToken.decimals,
+    );
+
+    // const _amounts = [...amounts.slice(1)];
+    const _amounts = amounts;
+
+    const [token0] = this._sortTokens(_srcAddress, _destAddress);
+
+    const zeroForOne = token0 === _srcAddress ? true : false;
+
+    const balanceDestToken =
+      _destAddress === pool.token0 ? state.balance0 : state.balance1;
+
+    const unitResult = this._getOutputs(
+      state,
+      [unitAmount],
+      zeroForOne,
+      side,
+      balanceDestToken,
+    );
+    const pricesResult = this._getOutputs(
+      state,
+      _amounts,
+      zeroForOne,
+      side,
+      balanceDestToken,
+    );
+
+    if (!unitResult || !pricesResult) {
+      this.logger.debug('Prices or unit is not calculated');
+      return null;
+    }
+
+    const prices = [...pricesResult.outputs];
+    const gasCost = [
+      ...pricesResult.outputs.map((p, index) => {
+        if (p == 0n) {
+          return 0;
+        } else {
+          return (
+            UNISWAPV3_POOL_SEARCH_OVERHEAD +
+            UNISWAPV3_TICK_BASE_OVERHEAD +
+            pricesResult.tickCounts[index] * UNISWAPV3_TICK_GAS_COST
+          );
+        }
+      }),
+    ];
+    return {
+      unit: unitResult.outputs[0],
+      prices,
+      data: {
+        path: [
+          {
+            tokenIn: _srcAddress,
+            tokenOut: _destAddress,
+            fee: pool.feeCode.toString(),
+            currentFee: state.fee.toString(),
+          },
+        ],
+      },
+      poolIdentifier: this.getPoolIdentifier(
+        pool.token0,
+        pool.token1,
+        pool.feeCode,
+      ),
+      exchange: this.dexKey,
+      gasCost: gasCost,
+      poolAddresses: [pool.poolAddress],
+    };
   }
 
   getAdapterParam(
