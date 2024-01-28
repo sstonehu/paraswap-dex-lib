@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Result } from '@ethersproject/abi';
 import BigNumber from 'bignumber.js';
 import { BytesLike, AbiCoder } from 'ethers';
@@ -47,7 +48,11 @@ export function generalDecoder<T>(
 export const uint256ToBigInt = (
   result: MultiResult<BytesLike> | BytesLike,
 ): bigint => {
-  return generalDecoder(result, ['uint256'], 0n, value => value[0].toBigInt());
+  // console.log('uint256ToBigInt', result);
+  // return generalDecoder(result, ['uint256'], 0n, value => value[0].toBigInt());
+  return generalDecoder(result, ['uint256'], 0n, value =>
+    BigInt(value[0].toString()),
+  );
 };
 
 export const uint256ArrayDecode = (
@@ -58,9 +63,12 @@ export const uint256ArrayDecode = (
   if (!isSuccess) {
     return 0n;
   }
-  return AbiCoder.defaultAbiCoder()
-    .decode(['uint256[]'], toDecode)[0]
-    .map((r: any) => r.toBigInt());
+  return (
+    AbiCoder.defaultAbiCoder()
+      .decode(['uint256[]'], toDecode)[0]
+      // .map((r: any) => r.toBigInt());
+      .map((r: any) => BigInt(r.toString()))
+  );
 };
 
 export const uin256DecodeToBigNumber = (

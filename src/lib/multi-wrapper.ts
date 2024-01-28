@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { BytesLike } from 'ethers';
 import _ from 'lodash';
 import { Logger } from 'log4js';
@@ -71,6 +72,9 @@ export class MultiWrapper {
           .call(undefined, blockNumber),
       ),
     );
+
+    // console.log('aggregatedResult');
+    // console.log(aggregatedResult);
 
     let globalInd = 0;
     const resultsUndecoded: MultiResult<string>[] = new Array(calls.length);

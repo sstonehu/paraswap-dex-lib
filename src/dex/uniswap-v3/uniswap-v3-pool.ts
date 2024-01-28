@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
 import _ from 'lodash';
 import { Contract } from 'web3-eth-contract';
-import { Interface } from 'ethers';
+// import { Interface } from 'ethers';
+import { defaultAbiCoder, Interface } from '@ethersproject/abi';
+
 import { ethers } from 'ethers';
 import { assert, DeepReadonly } from 'ts-essentials';
 import { Log, Logger, BlockHeader, Address } from '../../types';
@@ -242,6 +245,10 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
     return this._stateRequestCallData;
   }
 
+  getStateRequestCallData() {
+    return this._getStateRequestCallData();
+  }
+
   getBitmapRangeToRequest() {
     return TICK_BITMAP_TO_USE + TICK_BITMAP_BUFFER;
   }
@@ -270,6 +277,8 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
       resBalance1.returnData,
       resState.returnData,
     ] as [bigint, bigint, DecodedStateMultiCallResultWithRelativeBitmaps];
+
+    // console.log('resState: ', resState);
 
     const tickBitmap = {};
     const ticks = {};
@@ -300,9 +309,82 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
       slot0: {
         sqrtPriceX96: bigIntify(_state.slot0.sqrtPriceX96),
         tick: currentTick,
-        observationIndex: +_state.slot0.observationIndex,
-        observationCardinality: +_state.slot0.observationCardinality,
-        observationCardinalityNext: +_state.slot0.observationCardinalityNext,
+        observationIndex: Number(_state.slot0.observationIndex),
+        observationCardinality: Number(_state.slot0.observationCardinality),
+        observationCardinalityNext: Number(
+          _state.slot0.observationCardinalityNext,
+        ),
+        feeProtocol: bigIntify(_state.slot0.feeProtocol),
+      },
+      liquidity: bigIntify(_state.liquidity),
+      fee: this.feeCode,
+      tickSpacing,
+      maxLiquidityPerTick: bigIntify(_state.maxLiquidityPerTick),
+      tickBitmap,
+      ticks,
+      observations,
+      isValid: true,
+      startTickBitmap,
+      lowestKnownTick:
+        (BigInt.asIntN(24, startTickBitmap - requestedRange) << 8n) *
+        tickSpacing,
+      highestKnownTick:
+        ((BigInt.asIntN(24, startTickBitmap + requestedRange) << 8n) +
+          BigInt.asIntN(24, 255n)) *
+        tickSpacing,
+      balance0,
+      balance1,
+    };
+  }
+
+  calcState(resBalance0: any, resBalance1: any, resState: any) {
+    // / Quite ugly solution, but this is the one that fits to current flow.
+    // I think UniswapV3 callbacks subscriptions are complexified for no reason.
+    // Need to be revisited later
+    assert(resState.success, 'Pool does not exist');
+
+    const [balance0, balance1, _state] = [
+      resBalance0.returnData,
+      resBalance1.returnData,
+      resState.returnData,
+    ] as [bigint, bigint, DecodedStateMultiCallResultWithRelativeBitmaps];
+
+    // console.log('resState: ', resState);
+
+    const tickBitmap = {};
+    const ticks = {};
+
+    _reduceTickBitmap(tickBitmap, _state.tickBitmap);
+    _reduceTicks(ticks, _state.ticks);
+
+    const observations = {
+      [_state.slot0.observationIndex]: {
+        blockTimestamp: bigIntify(_state.observation.blockTimestamp),
+        tickCumulative: bigIntify(_state.observation.tickCumulative),
+        secondsPerLiquidityCumulativeX128: bigIntify(
+          _state.observation.secondsPerLiquidityCumulativeX128,
+        ),
+        initialized: _state.observation.initialized,
+      },
+    };
+
+    const currentTick = bigIntify(_state.slot0.tick);
+    const tickSpacing = bigIntify(_state.tickSpacing);
+
+    const startTickBitmap = TickBitMap.position(currentTick / tickSpacing)[0];
+    const requestedRange = this.getBitmapRangeToRequest();
+
+    return {
+      pool: _state.pool,
+      blockTimestamp: bigIntify(_state.blockTimestamp),
+      slot0: {
+        sqrtPriceX96: bigIntify(_state.slot0.sqrtPriceX96),
+        tick: currentTick,
+        observationIndex: Number(_state.slot0.observationIndex),
+        observationCardinality: Number(_state.slot0.observationCardinality),
+        observationCardinalityNext: Number(
+          _state.slot0.observationCardinalityNext,
+        ),
         feeProtocol: bigIntify(_state.slot0.feeProtocol),
       },
       liquidity: bigIntify(_state.liquidity),

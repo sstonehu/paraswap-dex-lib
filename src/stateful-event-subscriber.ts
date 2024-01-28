@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AsyncOrSync, DeepReadonly } from 'ts-essentials';
 import { Log, Logger } from './types';
 import { BlockHeader } from 'web3-eth';
@@ -453,6 +454,7 @@ export abstract class StatefulEventSubscriber<State>
   //current state, then the current state will be updated and the invalid flag
   //can be reset.
   setState(state: DeepReadonly<State>, blockNumber: number): void {
+    // console.log(`enter setState: `, blockNumber, state);
     if (!blockNumber) {
       this.logger.error('setState() with blockNumber', blockNumber);
       return;

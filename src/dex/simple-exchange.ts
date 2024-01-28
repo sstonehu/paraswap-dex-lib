@@ -1,4 +1,6 @@
-import { Interface } from 'ethers';
+// import { Interface } from 'ethers';
+import { defaultAbiCoder, Interface } from '@ethersproject/abi';
+
 import Web3Abi, { AbiCoder } from 'web3-eth-abi';
 import { Contract } from 'web3-eth-contract';
 import { Address, SimpleExchangeParam, NumberAsString } from '../types';
