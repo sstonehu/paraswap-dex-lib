@@ -99,3 +99,8 @@ export function decodeStateMultiCallResultWithRelativeBitmaps(
   // But I typed only the ones that are used later
   return decoded[0] as DecodedStateMultiCallResultWithRelativeBitmaps;
 }
+
+// exports  stateMultiCallInterface
+export const stateMultiCallInterface = new ethers.Interface(
+  UniswapV3StateMulticallABI,
+);

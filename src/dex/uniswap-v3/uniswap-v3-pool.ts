@@ -342,17 +342,21 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
     };
   }
 
-  calcState(resBalance0: any, resBalance1: any, resState: any) {
+  calcState(
+    balance0: bigint,
+    balance1: bigint,
+    _state: DecodedStateMultiCallResultWithRelativeBitmaps,
+  ) {
     // / Quite ugly solution, but this is the one that fits to current flow.
     // I think UniswapV3 callbacks subscriptions are complexified for no reason.
     // Need to be revisited later
-    assert(resState.success, 'Pool does not exist');
+    // assert(resState.success, 'Pool does not exist');
 
-    const [balance0, balance1, _state] = [
-      resBalance0.returnData,
-      resBalance1.returnData,
-      resState.returnData,
-    ] as [bigint, bigint, DecodedStateMultiCallResultWithRelativeBitmaps];
+    // const [balance0, balance1, _state] = [
+    //   resBalance0.returnData,
+    //   resBalance1.returnData,
+    //   resState.returnData,
+    // ] as [bigint, bigint, DecodedStateMultiCallResultWithRelativeBitmaps];
 
     // console.log('resState: ', resState);
 

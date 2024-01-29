@@ -15,6 +15,7 @@ export { MaverickBinMap } from './dex/maverick-v1/maverick-math/maverick-bin-map
 export { UniswapV3 } from './dex/uniswap-v3/uniswap-v3';
 export { DecodedStateMultiCallResultWithRelativeBitmaps } from './dex/uniswap-v3/types';
 export { UniswapV3EventPool } from './dex/uniswap-v3/uniswap-v3-pool';
+export { stateMultiCallInterface } from './dex/uniswap-v3/utils';
 
 export {
   IDexHelper,
