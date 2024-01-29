@@ -113,6 +113,8 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
         this.feeCode,
       );
     }
+    // console.log(`factoryAddress: ${this.factoryAddress}, initCodeHash: ${this.poolInitCodeHash}`);
+    // console.log(`token0: ${this.token0}, token1: ${this.token1}, feeCode: ${this.feeCode}, poolAddress: ${this._poolAddress}`)
     return this._poolAddress;
   }
 
@@ -271,6 +273,9 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
     // I think UniswapV3 callbacks subscriptions are complexified for no reason.
     // Need to be revisited later
     assert(resState.success, 'Pool does not exist');
+    // if(!resState.success) {
+    //   return null;
+    // }
 
     const [balance0, balance1, _state] = [
       resBalance0.returnData,
@@ -585,17 +590,28 @@ export class UniswapV3EventPool extends StatefulEventSubscriber<PoolState> {
     // https://github.com/Uniswap/v3-periphery/blob/main/contracts/libraries/PoolAddress.sol
     if (token0 > token1) [token0, token1] = [token1, token0];
 
-    const encodedKey = ethers.keccak256(
+    // console.log(`token0: ${token0}, token1: ${token1}, fee: ${fee}`);
+    // console.log(`factoryAddress: ${this.factoryAddress}, initCodeHash: ${this.poolInitCodeHash}`);
+    const constructorArgumentsEncoded =
       ethers.AbiCoder.defaultAbiCoder().encode(
         ['address', 'address', 'uint24'],
-        [token0, token1, BigInt.asUintN(24, fee)],
-      ),
-    );
-
-    return ethers.getCreate2Address(
+        [token0, token1, fee],
+      );
+    // console.log(`constructorArgumentsEncoded: ${constructorArgumentsEncoded}`);
+    const create2Inputs = [
+      '0xff',
       this.factoryAddress,
-      encodedKey,
+      ethers.keccak256(constructorArgumentsEncoded),
       this.poolInitCodeHash,
+    ];
+    // console.log(`create2Inputs: `, create2Inputs);
+    const create2InputsEncoded = ethers.solidityPacked(
+      ['bytes1', 'address', 'bytes32', 'bytes32'],
+      create2Inputs,
+    );
+    // console.log(`create2InputsEncoded: `, create2InputsEncoded);
+    return ethers.getAddress(
+      `0x${ethers.keccak256(create2InputsEncoded).slice(-40)}`,
     );
   }
 }

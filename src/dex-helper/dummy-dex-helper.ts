@@ -269,7 +269,7 @@ export class DummyDexHelper implements IDexHelper {
     this.blockManager = new DummyBlockManager();
     this.getLogger = name => {
       const logger = log4js.getLogger(name);
-      logger.level = 'debug';
+      logger.level = 'info';
       return logger;
     };
     // For testing use only full parts like 1, 2, 3 ETH, not 0.1 ETH etc

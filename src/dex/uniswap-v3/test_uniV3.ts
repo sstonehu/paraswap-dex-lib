@@ -49,7 +49,7 @@ async function main() {
   const amounts = [BigInt(2e18), BigInt(4e18), BigInt(10e18)];
 
   const dexHelper = new DummyDexHelper(network, HTTP_PROVIDER_1);
-  const dexKey = 'UniswapV3';
+  const dexKey = 'SushiSwapV3';
 
   // 0. prepare all mavV1 pools
   // create MaverickV1 instance, and initialize all pools
@@ -105,24 +105,21 @@ async function main() {
   >(false, calls, blockNumber, dexHelper.multiWrapper.defaultBatchSize, false);
 
   for (const [idx, pool] of logPools.entries()) {
-    const [resBalance0, resBalance1, resState] = results.slice(
-      idx * 3,
-      idx * 3 + 3,
-    );
-    const newState = pool?.calcState(resBalance0, resBalance1, resState);
-    if (!newState) {
-      console.log(`no state for pool: `, pool?.poolAddress);
-    } else {
-      // console.log(`set state for pool: `, pool?.poolAddress);
-      pool?.setState(newState, blockNumber);
-      // const poolIdentifier = uniswapV3.getIdentifierByPool(pool);
-      // const eventPool = uniswapV3.eventPools[poolIdentifier];
-      // console.log(poolIdentifier);
-      // console.log(uniswapV3.eventPools[poolIdentifier]);
-      // uniswapV3.eventPools[poolIdentifier]?.setState(newState, blockNumber);
-
-      // let state = uniswapV3?.eventPools[poolIdentifier]?.getState(blockNumber);
-      // console.log(pool?.poolAddress, `state after set: `, state);
+    try {
+      const [resBalance0, resBalance1, resState] = results.slice(
+        idx * 3,
+        idx * 3 + 3,
+      );
+      const newState = pool?.calcState(resBalance0, resBalance1, resState);
+      if (!newState) {
+        console.log(`no state for pool: `, pool?.poolAddress);
+      } else {
+        // console.log(`set state for pool: `, pool?.poolAddress);
+        pool?.setState(newState, blockNumber);
+      }
+    } catch (error) {
+      console.log(`pool does not exist: `, pool?.poolAddress);
+      // console.log(error);
     }
   }
 

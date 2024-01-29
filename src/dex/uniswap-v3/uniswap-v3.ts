@@ -322,6 +322,8 @@ export class UniswapV3
         this.config.initHash,
       );
 
+    // console.log('pool.address: ', pool.poolAddress);
+
     // try {
     //   await pool.initialize(blockNumber, {
     //     initCallback: (state: DeepReadonly<PoolState>) => {
@@ -361,7 +363,7 @@ export class UniswapV3
 
     if (pool !== null) {
       const allEventPools = Object.values(this.eventPools);
-      this.logger.info(
+      this.logger.debug(
         `starting to listen to new non-null pool: ${key}. Already following ${allEventPools
           // Not that I like this reduce, but since it is done only on initialization, expect this to be ok
           .reduce(
