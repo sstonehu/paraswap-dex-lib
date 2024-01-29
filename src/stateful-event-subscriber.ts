@@ -363,38 +363,38 @@ export abstract class StatefulEventSubscriber<State>
   }
 
   _setState(state: DeepReadonly<State> | null, blockNumber: number) {
-    if (
-      this.dexHelper.config.isSlave &&
-      this.masterPoolNeeded &&
-      state === null
-    ) {
-      this._logBatchTypicalMessages(
-        `${this.parentName}: schedule a job to get state from cache`,
-        'info',
-      );
+    // if (
+    //   this.dexHelper.config.isSlave &&
+    //   this.masterPoolNeeded &&
+    //   state === null
+    // ) {
+    //   this._logBatchTypicalMessages(
+    //     `${this.parentName}: schedule a job to get state from cache`,
+    //     'info',
+    //   );
 
-      this.dexHelper.cache.addBatchHGet(
-        this.mapKey,
-        this.name,
-        (result: string | null) => {
-          if (!result) {
-            this._logBatchTypicalMessages(`received null result`, 'warn');
-            return false;
-          }
-          const state: StateCache<State> = Utils.Parse(result);
-          if (!state.state) {
-            return false;
-          }
+    //   this.dexHelper.cache.addBatchHGet(
+    //     this.mapKey,
+    //     this.name,
+    //     (result: string | null) => {
+    //       if (!result) {
+    //         this._logBatchTypicalMessages(`received null result`, 'warn');
+    //         return false;
+    //       }
+    //       const state: StateCache<State> = Utils.Parse(result);
+    //       if (!state.state) {
+    //         return false;
+    //       }
 
-          this._logBatchTypicalMessages(
-            `${this.parentName}: received state from a scheduled job`,
-            'info',
-          );
-          this.setState(state.state, state.bn);
-          return true;
-        },
-      );
-    }
+    //       this._logBatchTypicalMessages(
+    //         `${this.parentName}: received state from a scheduled job`,
+    //         'info',
+    //       );
+    //       this.setState(state.state, state.bn);
+    //       return true;
+    //     },
+    //   );
+    // }
 
     this.state = state;
     this.stateBlockNumber = blockNumber;
@@ -403,19 +403,19 @@ export abstract class StatefulEventSubscriber<State>
       return;
     }
 
-    this._logBatchTypicalMessages(
-      `${this.parentName}: saving state in cache`,
-      'info',
-    );
+    // this._logBatchTypicalMessages(
+    //   `${this.parentName}: saving state in cache`,
+    //   'info',
+    // );
 
-    this.dexHelper.cache.hset(
-      this.mapKey,
-      this.name,
-      Utils.Serialize({
-        bn: blockNumber,
-        state,
-      }),
-    );
+    // this.dexHelper.cache.hset(
+    //   this.mapKey,
+    //   this.name,
+    //   Utils.Serialize({
+    //     bn: blockNumber,
+    //     state,
+    //   }),
+    // );
   }
 
   // This is really very limited log aggregator function used in one place (currently)
