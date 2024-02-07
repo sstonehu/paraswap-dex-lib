@@ -42,6 +42,18 @@ export const UniswapV3Config: DexConfigMap<DexParams> = {
       initHash: `0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54`,
       subgraphURL: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
     },
+    [Network.LOCAL]: {
+      factory: '0x1F98431c8aD98523631AE4a59f267346ea31F984',
+      quoter: '0x61fFE014bA17989E743c5F6cB21bF9697530B21e',
+      router: '0xE592427A0AEce92De3Edee1F18E0157C05861564',
+      supportedFees: SUPPORTED_FEES,
+      stateMulticall: '0x9c764D2e92dA68E4CDfD784B902283A095ff8b63',
+      uniswapMulticall: '0x1F98415757620B543A52E61c46B32eB19261F984',
+      chunksCount: 10,
+      initRetryFrequency: 10,
+      initHash: `0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54`,
+      subgraphURL: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
+    },
     [Network.BSC]: {
       factory: '0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7',
       quoter: '0x78D78E420Da98ad378D7799bE8f4AF69033EB077',

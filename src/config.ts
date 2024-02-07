@@ -118,6 +118,88 @@ const baseConfigs: { [network: number]: BaseConfig } = {
       },
     },
   },
+  [Network.LOCAL]: {
+    network: Network.MAINNET,
+    networkName: 'Ethereum Mainnet',
+    isTestnet: false,
+    nativeTokenName: 'Ether',
+    nativeTokenSymbol: 'ETH',
+    wrappedNativeTokenAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+    hasEIP1559: true,
+    augustusAddress: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57',
+    augustusRFQAddress: '0xe92b586627ccA7a83dC919cc7127196d70f55a06',
+    tokenTransferProxyAddress: '0x216b4b4ba9f3e719726886d34a177484278bfcae',
+    multicallV2Address: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+    privateHttpProvider: process.env.HTTP_PROVIDER_1,
+    adapterAddresses: {
+      Adapter01: '0x9bE264469eF954c139Da4A45Cf76CbCC5e3A6A73',
+      Adapter02: '0xFC2Ba6E830a04C25e207B8214b26d8C713F6881F',
+      Adapter03: '0x7c7f62e5ba00783f57b39df0530e32c195696a57',
+      Adapter04: '0x21ab8aeb35bfc0b3fd84ca810b0aa85938357be2',
+      BuyAdapter: '0x760870be538e7b4E2110e2890473CC17ADB1fdC1',
+    },
+    uniswapV2ExchangeRouterAddress:
+      '0xF9234CB08edb93c0d4a4d4c70cC3FfD070e78e07',
+    rpcPollingMaxAllowedStateDelayInBlocks: 0,
+    rpcPollingBlocksBackToTriggerUpdate: 0,
+    hashFlowAuthToken: process.env.API_KEY_HASHFLOW_AUTH_TOKEN || '',
+    hashFlowDisabledMMs:
+      process.env[`HASHFLOW_DISABLED_MMS_1`]?.split(',') || [],
+    uniswapV3EventLoggingSampleRate: 0,
+    rfqConfigs: {
+      DummyParaSwapPool: {
+        maker: process.env.TEST_ADDRESS!,
+        tokensConfig: {
+          reqParams: {
+            url: `http://localhost:${PORT_TEST_SERVER}/tokens`,
+            method: 'GET',
+          },
+          secret: {
+            domain: 'paraswap-test',
+            accessKey: 'access',
+            secretKey: 'secret',
+          },
+          intervalMs: 1000 * 60 * 60 * 10, // every 10 minutes
+          dataTTLS: 1000 * 60 * 60 * 11, // ttl 11 minutes
+        },
+        pairsConfig: {
+          reqParams: {
+            url: `http://localhost:${PORT_TEST_SERVER}/pairs`,
+            method: 'GET',
+          },
+          secret: {
+            domain: 'paraswap-test',
+            accessKey: 'access',
+            secretKey: 'secret',
+          },
+          intervalMs: 1000 * 60 * 60 * 10, // every 10 minutes
+          dataTTLS: 1000 * 60 * 60 * 11, // ttl 11 minutes
+        },
+        rateConfig: {
+          reqParams: {
+            url: `http://localhost:${PORT_TEST_SERVER}/prices`,
+            method: 'GET',
+          },
+          secret: {
+            domain: 'paraswap-test',
+            accessKey: 'access',
+            secretKey: 'secret',
+          },
+          intervalMs: 1000 * 60 * 60 * 1, // every 1 minute
+          dataTTLS: 1000 * 60 * 60 * 1, // ttl 1 minute
+        },
+        firmRateConfig: {
+          url: `http://localhost:${PORT_TEST_SERVER}/firm`,
+          method: 'POST',
+          secret: {
+            domain: 'paraswap-test',
+            accessKey: 'access',
+            secretKey: 'secret',
+          },
+        },
+      },
+    },
+  },
   [Network.ROPSTEN]: {
     network: Network.ROPSTEN,
     networkName: 'Ethereum Ropsten Testnet',
