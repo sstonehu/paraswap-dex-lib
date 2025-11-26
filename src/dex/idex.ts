@@ -153,6 +153,12 @@ export interface IDexWithRestriction {
   getRestrictedCacheKey(): string;
 }
 
+export interface IDexWithPairRestriction {
+  hasPairRestriction(): this is IDexWithPairRestriction;
+  isRestrictedPair(token0: string, token1: string): Promise<boolean>;
+  getRestrictedPairCacheKey(token0: string, token1: string): string;
+}
+
 export interface IDexPricing<ExchangeData> {
   readonly dexKey: string;
   // This is true if the the DEX is simply
