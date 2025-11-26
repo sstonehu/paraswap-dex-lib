@@ -31,7 +31,7 @@ type CACHE_TTL = number | 'none';
 type DexRestrictionOptions = {
   blacklistedTTL?: CACHE_TTL;
   enableDexRestriction?: boolean;
-  enablePoolRestriction?: boolean;
+  enablePairRestriction?: boolean;
   restrictCheckIntervalMs?: number;
   restrictCountThreshold?: number;
   restrictTtlS?: number;
@@ -65,7 +65,7 @@ export class SimpleExchangeWithRestrictions
     this.enableDexRestriction =
       options.enableDexRestriction ?? DEFAULT_ENABLE_DEX_RESTRICTION;
     this.enablePairRestriction =
-      options.enablePoolRestriction ?? DEFAULT_ENABLE_PAIR_RESTRICTION;
+      options.enablePairRestriction ?? DEFAULT_ENABLE_PAIR_RESTRICTION;
     this.restrictCheckIntervalMs =
       options.restrictCheckIntervalMs ?? RESTRICT_CHECK_INTERVAL_MS;
     this.restrictCountThreshold =
