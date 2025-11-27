@@ -229,6 +229,40 @@ export class PricingHelper {
     );
   }
 
+  async filterOutDexKeysWithRestrictedPair(
+    dexKeys: string[],
+    token0: string,
+    token1: string,
+  ): Promise<string[]> {
+    const dexesWithPairRestrictions: string[] = [];
+    const pairRestrictionCacheKeys: string[] = [];
+
+    for (const key of dexKeys) {
+      const dex = this.getDexByKey(key);
+
+      if (dex && dex.hasPairRestriction?.()) {
+        dexesWithPairRestrictions.push(key);
+        pairRestrictionCacheKeys.push(
+          dex.getRestrictedPairCacheKey(token0, token1),
+        );
+      }
+    }
+
+    if (!pairRestrictionCacheKeys.length) {
+      return dexKeys;
+    }
+
+    const result = await this.dexAdapterService.dexHelper.cache.mget(
+      pairRestrictionCacheKeys,
+    );
+
+    const dexesWithRestrictedPair = dexesWithPairRestrictions.filter(
+      (_, i) => result[i], // knowing the result is not NULL is sufficient
+    );
+
+    return dexKeys.filter(key => !dexesWithRestrictedPair.includes(key));
+  }
+
   getDexsSupportingFeeOnTransfer(): string[] {
     const allDexKeys = this.dexAdapterService.getAllDexKeys();
     return allDexKeys

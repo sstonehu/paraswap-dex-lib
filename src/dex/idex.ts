@@ -230,6 +230,7 @@ export interface IDexPricing<ExchangeData> {
   addMasterPool?(poolKey: string, blockNumber: number): AsyncOrSync<boolean>;
 
   hasDexRestriction?(): this is IDexWithRestriction;
+  hasPairRestriction?(): this is IDexWithPairRestriction;
   hasBlacklist?(): this is IDexWithBlacklist;
 
   // can be used to define what min usd value can be traded (e.g. on RFQ)
