@@ -67,12 +67,17 @@ export class PricingHelper {
     return this.dexAdapterService.getAllDexKeys();
   }
 
-  public getDexByKey(key: string): IDex<any, any, any> | null {
+  public getDexByKey(
+    key: string,
+    logWhenNotFound = true,
+  ): IDex<any, any, any> | null {
     try {
       return this.dexAdapterService.getDexByKey(key);
     } catch (e) {
       if (e instanceof Error && e.message.startsWith('Invalid Dex Key')) {
-        this.logger.warn(`Dex ${key} was not found in getDexByKey`);
+        if (logWhenNotFound) {
+          this.logger.warn(`Dex ${key} was not found in getDexByKey`);
+        }
         return null;
       }
       // Unexpected error
@@ -173,7 +178,7 @@ export class PricingHelper {
     const dexesWithNotSufficientUsdTrade: string[] = [];
 
     for (const key of dexKeys) {
-      const dex = this.getDexByKey(key);
+      const dex = this.getDexByKey(key, false);
 
       if (dex) {
         if (dex?.minUsdTradeValue) {
@@ -238,7 +243,7 @@ export class PricingHelper {
     const pairRestrictionCacheKeys: string[] = [];
 
     for (const key of dexKeys) {
-      const dex = this.getDexByKey(key);
+      const dex = this.getDexByKey(key, false);
 
       if (dex && dex.hasPairRestriction?.()) {
         dexesWithPairRestrictions.push(key);
