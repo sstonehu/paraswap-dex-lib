@@ -440,8 +440,6 @@ export class GenericRFQ extends ParaSwapLimitOrders {
         this.logger.warn(
           `${this.dexKey}-${this.network}: failed to build transaction on side ${side} with too strict slippage. Skipping restriction`,
         );
-      } else if (e instanceof BlacklistError) {
-        this.logger.warn(e.message);
       } else {
         this.logger.warn(
           `${this.dexKey}-${this.network}: protocol is restricted for pair ${srcToken.address} -> ${destToken.address}`,
