@@ -73,6 +73,7 @@ import {
 } from './utils';
 import { Method } from '../../dex-helper/irequest-wrapper';
 import {
+  BlacklistError,
   SlippageCheckError,
   TooStrictSlippageCheckError,
 } from '../generic-rfq/types';
@@ -498,11 +499,7 @@ export class SwaapV2
       this.logger.warn(
         `${this.dexKey}-${this.network}: blacklisted TX Origin address '${options.txOrigin}' trying to build a transaction. Bailing...`,
       );
-      throw new Error(
-        `${this.dexKey}-${
-          this.network
-        }: user=${options.txOrigin.toLowerCase()} is blacklisted`,
-      );
+      throw new BlacklistError(this.dexKey, this.network, options.txOrigin);
     }
 
     const isSell = side === SwapSide.SELL;
@@ -639,6 +636,11 @@ export class SwaapV2
           this.logger.warn(
             `${prefix}: Encountered blacklisted user=${options.userAddress}. Adding to local blacklist cache`,
           );
+          throw new BlacklistError(
+            this.dexKey,
+            this.network,
+            options.userAddress,
+          );
         }
 
         if (e.response?.status === 429) {
@@ -648,6 +650,11 @@ export class SwaapV2
           );
           this.logger.warn(
             `${prefix}: Encountered restricted user=${options.userAddress}. Adding to local blacklist cache`,
+          );
+          throw new BlacklistError(
+            this.dexKey,
+            this.network,
+            options.userAddress,
           );
         }
       } else if (e instanceof TooStrictSlippageCheckError) {
