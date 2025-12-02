@@ -17,6 +17,7 @@ import { ParaSwapLimitOrdersData } from '../paraswap-limit-orders/types';
 import { ONE_ORDER_GASCOST } from '../paraswap-limit-orders/constant';
 import { RateFetcher } from './rate-fetcher';
 import {
+  BlacklistError,
   PriceAndAmountBigNumber,
   RFQConfig,
   RFQDirectPayload,
@@ -331,24 +332,14 @@ export class GenericRFQ extends ParaSwapLimitOrders {
     options: PreprocessTransactionOptions,
   ): Promise<[OptimalSwapExchange<ParaSwapLimitOrdersData>, ExchangeTxInfo]> {
     if (await this.isBlacklisted(options.txOrigin)) {
-      this.logger.warn(
-        `${this.dexKey}-${this.network}: blacklisted TX Origin address '${options.txOrigin}' trying to build a transaction. Bailing...`,
-      );
-      throw new Error(
-        `${this.dexKey}-${this.network}: user=${options.txOrigin} is blacklisted`,
-      );
+      throw new BlacklistError(this.dexKey, this.network, options.txOrigin);
     }
 
     if (
       options.userAddress !== options.txOrigin &&
       (await this.isBlacklisted(options.userAddress))
     ) {
-      this.logger.warn(
-        `${this.dexKey}-${this.network}: blacklisted user address '${options.userAddress}' trying to build a transaction. Bailing...`,
-      );
-      throw new Error(
-        `${this.dexKey}-${this.network}: user=${options.userAddress} is blacklisted`,
-      );
+      throw new BlacklistError(this.dexKey, this.network, options.userAddress);
     }
 
     try {
@@ -449,6 +440,8 @@ export class GenericRFQ extends ParaSwapLimitOrders {
         this.logger.warn(
           `${this.dexKey}-${this.network}: failed to build transaction on side ${side} with too strict slippage. Skipping restriction`,
         );
+      } else if (e instanceof BlacklistError) {
+        this.logger.warn(e.message);
       } else {
         this.logger.warn(
           `${this.dexKey}-${this.network}: protocol is restricted for pair ${srcToken.address} -> ${destToken.address}`,
