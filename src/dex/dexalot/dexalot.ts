@@ -38,6 +38,7 @@ import {
   TokenDataMap,
 } from './types';
 import {
+  BlacklistError,
   SlippageCheckError,
   TooStrictSlippageCheckError,
 } from '../generic-rfq/types';
@@ -566,11 +567,7 @@ export class Dexalot
       this.logger.warn(
         `${this.dexKey}-${this.network}: blacklisted TX Origin address '${options.txOrigin}' trying to build a transaction. Bailing...`,
       );
-      throw new Error(
-        `${this.dexKey}-${
-          this.network
-        }: user=${options.txOrigin.toLowerCase()} is blacklisted`,
-      );
+      throw new BlacklistError(this.dexKey, this.network, options.txOrigin);
     }
 
     if (BigInt(optimalSwapExchange.srcAmount) === 0n) {
@@ -727,10 +724,20 @@ export class Dexalot
             options.userAddress,
             errorData.RetryAfter ?? DEXALOT_RATE_LIMITED_TTL_S,
           );
+          throw new BlacklistError(
+            this.dexKey,
+            this.network,
+            options.userAddress,
+          );
         } else {
           await this.addBlacklistedAddress(options.userAddress);
           this.logger.error(
             `${this.dexKey}-${this.network}: Failed to fetch RFQ for ${swapIdentifier}: ${errorData.Reason}`,
+          );
+          throw new BlacklistError(
+            this.dexKey,
+            this.network,
+            options.userAddress,
           );
         }
       } else {
