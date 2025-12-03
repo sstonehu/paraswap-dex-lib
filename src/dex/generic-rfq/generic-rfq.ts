@@ -33,7 +33,7 @@ import {
 import { BI_MAX_UINT256 } from '../../bigint-constants';
 import { SpecialDex } from '../../executor/types';
 import { hexConcat, hexZeroPad, hexlify } from 'ethers/lib/utils';
-import { isETHAddress, uuidToBytes16 } from '../../utils';
+import { isAxiosError, isETHAddress, uuidToBytes16 } from '../../utils';
 
 export const OVERORDER_BPS = 100;
 export const BPS_MAX_VALUE = 10000n;
@@ -436,7 +436,17 @@ export class GenericRFQ extends ParaSwapLimitOrders {
         { deadline: minDeadline },
       ];
     } catch (e) {
-      if (e instanceof SlippageCheckError) {
+      if (isAxiosError(e) && e.response?.status === 403) {
+        await this.addBlacklistedAddress(options.userAddress);
+        this.logger.warn(
+          `${this.dexKey}-${this.network}: encountered blacklisted user=${options.userAddress}. Adding to local blacklist cache`,
+        );
+        throw new BlacklistError(
+          this.dexKey,
+          this.network,
+          options.userAddress,
+        );
+      } else if (e instanceof SlippageCheckError) {
         this.logger.warn(
           `${this.dexKey}-${this.network}: failed to build transaction on side ${side} with too strict slippage. Skipping restriction`,
         );
