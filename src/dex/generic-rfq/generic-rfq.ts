@@ -446,7 +446,9 @@ export class GenericRFQ extends ParaSwapLimitOrders {
           this.network,
           options.userAddress,
         );
-      } else if (e instanceof SlippageCheckError) {
+      }
+
+      if (e instanceof SlippageCheckError) {
         this.logger.warn(
           `${this.dexKey}-${this.network}: failed to build transaction on side ${side} with too strict slippage. Skipping restriction`,
         );
